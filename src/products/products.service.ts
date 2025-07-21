@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma.service'; 
 import { CreateProductDto } from './dto/create-product.dto';
-import { Product } from 'generated/prisma';
+import { Product } from '@prisma/client';
 
 @Injectable()
 export class ProductsService {
@@ -14,16 +14,13 @@ export class ProductsService {
         try {
             const created = await this.prisma.product.create({
                 data: {
-                    name: dto.name,
-                    description: dto.description,
-                    price: dto.price,
-                    stock: dto.stock,
+                    ...dto,
                     tags: (dto.tags ?? []).join(','),
                 }
             });
             return created;
         } catch (error) {
-            throw new HttpException('Error', HttpStatus.BAD_REQUEST);
+            throw new HttpException('Error creating product', HttpStatus.INTERNAL_SERVER_ERROR);
         }
     } 
 }
