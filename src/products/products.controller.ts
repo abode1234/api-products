@@ -1,3 +1,10 @@
+/*
+ * Creates a new product in the database.
+ * @param dto The data transfer object containing product details.
+ * @returns A Promise that resolves to the created Product object.
+ * @throws HttpException if product creation fails (e.g., duplicate name, internal server error).
+*/
+
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { Product as ProductModel } from 'generated/prisma';

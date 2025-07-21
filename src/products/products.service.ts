@@ -1,4 +1,4 @@
-/**
+/*
  * Creates a new product in the database.
  * @param dto The data transfer object containing product details.
  * @returns A Promise that resolves to the created Product object.
@@ -40,7 +40,7 @@ export class ProductsService {
     }
     async findByName(name: string): Promise<Product| null> {
         try {
-            return await this.prisma.product.findFirst({
+            return await this.prisma.product.findUnique({
                 where: {
                     name: name,
                 }
