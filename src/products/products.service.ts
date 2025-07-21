@@ -38,7 +38,7 @@ export class ProductsService {
             throw new HttpException('Error creating product', HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    async findByName(name: string): Promise<Product | null> {
+    async findByName(name: string): Promise<Product| null> {
         try {
             return await this.prisma.product.findFirst({
                 where: {
@@ -47,6 +47,14 @@ export class ProductsService {
             });
         } catch (error) {
             throw new HttpException('Error fetching product from database', HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    async findAll(): Promise<Product[]> {
+        try {
+            return await this.prisma.product.findMany();
+        } catch (error) {
+            throw new HttpException('Error fetching products from database', HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

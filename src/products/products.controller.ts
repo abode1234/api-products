@@ -21,7 +21,13 @@ export class ProductsController {
 @Get('/') 
   async findByName(
     @Query('name') name: string, 
-  ): Promise<ProductModel | null> {
+  ): Promise<ProductModel| null> {
     return await this.productsService.findByName(name);
 }
+
+@Get('/all') 
+  async findAll(): Promise<ProductModel[]> {
+    return await this.productsService.findAll();
+  }
+
 }

@@ -15,11 +15,11 @@ datasource db {
 
 
 model Product {
-        id           Int     @id @default(autoincrement())
-        name         String?
-        description  String?
-        price        Int
-        stock        Int 
-        tags         String
-
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  description String?
+  price       Float
+  stock       Int
+  tags        String    // هنا نخزن مصفوفة مثل: ["tag1", "tag2"]
 }
+
